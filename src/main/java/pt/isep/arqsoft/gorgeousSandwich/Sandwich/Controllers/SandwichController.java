@@ -25,11 +25,14 @@ public class SandwichController {
 
     @PostMapping("/createSandwich")
     public ResponseEntity<CreatingSandwichDto> register(@Validated @RequestBody CreatingSandwichDto creatingSandwichDto) throws BusinessRuleViolationException {
-        if(this.sandwichService.createSandwich(creatingSandwichDto)!=null) {
-            return ResponseEntity.ok().body(creatingSandwichDto);
-        } else {
-            return ResponseEntity.notFound().build();
+        try{
+            this.sandwichService.createSandwich(creatingSandwichDto);
+        }catch (Exception e){
+        //TODO Log error
+        e.printStackTrace();
+        return ResponseEntity.badRequest().build();
         }
+        return ResponseEntity.ok().body(creatingSandwichDto);
     }
 
     @GetMapping("/getAllSandwiches")

@@ -1,6 +1,7 @@
 package pt.isep.arqsoft.gorgeousSandwich.ValueObjects;
 
 import org.junit.jupiter.api.Test;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Description;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 
 import static com.mongodb.assertions.Assertions.assertTrue;

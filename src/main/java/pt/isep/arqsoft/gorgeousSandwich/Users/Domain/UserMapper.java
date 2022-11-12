@@ -1,11 +1,11 @@
 package pt.isep.arqsoft.gorgeousSandwich.Users.Domain;
 
 import org.springframework.stereotype.Component;
-import pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain.CreatingSandwichDto;
-import pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain.Sandwich;
-import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Designation;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Email;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Password;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TaxIdentification;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Username;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.*;
 
 @Component
 public class UserMapper implements IUserMapper {

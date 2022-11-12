@@ -3,10 +3,6 @@ package pt.isep.arqsoft.gorgeousSandwich.Users.Services;
 import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.*;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Email;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Password;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.TaxIdentification;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Username;
 
 import java.util.ArrayList;
 import java.util.List;

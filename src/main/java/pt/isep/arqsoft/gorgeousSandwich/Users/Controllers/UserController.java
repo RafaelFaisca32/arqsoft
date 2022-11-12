@@ -3,7 +3,6 @@ package pt.isep.arqsoft.gorgeousSandwich.Users.Controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain.SandwichDto;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.CreatingUserDto;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.IUserService;
@@ -37,11 +36,14 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<CreatingUserDto> register(@Validated @RequestBody CreatingUserDto userDTO)  throws BusinessRuleViolationException {
-        if(this.userService.register(userDTO)!=null) {
-            return ResponseEntity.ok().body(userDTO);
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            this.userService.register(userDTO);
+        }catch (Exception e) {
+            //TODO Log error
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         }
+        return ResponseEntity.ok().body(userDTO);
     }
 
     @GetMapping("/getAllUsers")

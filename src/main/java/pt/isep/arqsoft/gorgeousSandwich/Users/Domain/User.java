@@ -2,11 +2,10 @@ package pt.isep.arqsoft.gorgeousSandwich.Users.Domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain.Sandwich;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Email;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Password;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.TaxIdentification;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Username;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Email;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Password;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TaxIdentification;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Username;
 
 @Document("user")
 public class User {
@@ -30,31 +29,16 @@ public class User {
         return email;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
     public Password getPassword() {
         return password;
-    }
-
-    public void setPassword(Password password) {
-        this.password = password;
     }
 
     public TaxIdentification getTaxIdentification() {
         return taxIdentification;
     }
 
-    public void setTaxIdentification(TaxIdentification taxIdentification) {
-        this.taxIdentification = taxIdentification;
-    }
-
     public Username getUsername() {
         return username;
     }
 
-    public void setUsername(Username username) {
-        this.username = username;
-    }
 }

@@ -1,14 +1,13 @@
 package pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain;
 
 import org.junit.jupiter.api.Test;
-
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Description;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Designation;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.SellingPrice;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Description;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.SellingPrice;
 
-
-import static com.mongodb.assertions.Assertions.*;
+import static com.mongodb.assertions.Assertions.assertTrue;
+import static com.mongodb.assertions.Assertions.fail;
 
 class SandwichTest {
     String invalidString = "";

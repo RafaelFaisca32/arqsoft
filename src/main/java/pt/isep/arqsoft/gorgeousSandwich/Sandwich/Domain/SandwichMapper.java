@@ -1,10 +1,10 @@
 package pt.isep.arqsoft.gorgeousSandwich.Sandwich.Domain;
 
 import org.springframework.stereotype.Component;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Description;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Designation;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.SellingPrice;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.Description;
-import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.SellingPrice;
 
 @Component
 public class SandwichMapper implements ISandwichMapper {
