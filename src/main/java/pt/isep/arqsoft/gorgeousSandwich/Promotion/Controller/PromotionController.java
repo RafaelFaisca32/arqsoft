@@ -22,13 +22,14 @@ public class PromotionController {
 
 
     @PostMapping
-    public ResponseEntity<PromotionDTO> createShop(@Validated @RequestBody PromotionDTO promotionDTO) {
+    public ResponseEntity<PromotionDTO> createPromotion(@Validated @RequestBody PromotionDTO promotionDTO) {
         //LOGGER.trace(String.format("Requesting the creation of a new promotion (%s)", promotionDTO));
         try {
             promotionDTO = service.createPromotion(promotionDTO);
             return ResponseEntity.ok().body(promotionDTO);
         } catch (Exception e) {
             //LOGGER.error("Could not create Shop!",e);
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }

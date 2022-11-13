@@ -8,6 +8,8 @@ import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.CreatingUserDto;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.IUserService;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.UserDto;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@Validated @RequestBody CreatingUserDto userDTO){
+    public ResponseEntity<UserDto> login(@Validated @RequestBody CreatingUserDto userDTO) throws NoSuchAlgorithmException, InvalidKeySpecException {
         List<UserDto> userDTOList = this.userService.getAll();
         UserDto loggedUser = this.userService.getLogin(userDTOList,userDTO);
         if(loggedUser != null) {
@@ -37,17 +39,17 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<CreatingUserDto> register(@Validated @RequestBody CreatingUserDto userDTO)  throws BusinessRuleViolationException {
         try {
-            this.userService.register(userDTO);
+           CreatingUserDto dto = this.userService.register(userDTO);
+            return ResponseEntity.ok().body(dto);
         }catch (Exception e) {
             //TODO Log error
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(userDTO);
     }
 
     @GetMapping("/getAllUsers")
-    public ResponseEntity<List<UserDto>> getAllSandwiches() throws BusinessRuleViolationException {
+    public ResponseEntity<List<UserDto>> getAllSandwiches() throws NoSuchAlgorithmException, InvalidKeySpecException {
         try {
             this.userService.getAll();
         } catch (Exception e) {

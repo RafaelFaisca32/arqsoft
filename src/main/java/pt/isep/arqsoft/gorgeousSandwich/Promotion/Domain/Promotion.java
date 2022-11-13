@@ -32,6 +32,10 @@ public abstract class Promotion implements IAggregateRoot<PromotionId> {
         this.type=type;
     }
 
+    protected Promotion() {
+
+    }
+
     @Override
     public boolean sameAs(IEntity<? extends IEntityId> otherEntity) {
         if (otherEntity instanceof Promotion) {

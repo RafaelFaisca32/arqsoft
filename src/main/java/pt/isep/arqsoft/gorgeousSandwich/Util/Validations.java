@@ -9,7 +9,7 @@ public class Validations {
 
 
     public static void numberIsInBetween(double value, double lower, double higher) throws ValidationException {
-        if (!(value >= lower) || !(value <= higher))
+        if (value <= lower || value >= higher)
             throw new ValidationException(String.format("Number %s is not between %s and %s!", value, lower, higher));
     }
 

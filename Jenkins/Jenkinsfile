@@ -1,0 +1,58 @@
+node{
+    checkout scm
+
+    def par = [:]
+    par.test = {
+        stage("Test and jacoco"){
+            if(isUnix()){
+                sh 'mvn test'
+            }else{
+                bat 'mvn test'
+            }
+        }
+    }
+
+    par.javadoc = {
+        stage("Javadoc"){
+            if(isUnix()){
+                sh 'mvn javadoc:javadoc'
+            }else{
+                sh 'mvn javadoc:javadoc'
+            }
+        }
+    }
+
+    dir("part 1/projects/gorgeousSandwich"){
+
+    stage("Build"){
+        if(isUnix()){
+            sh 'mvn compile'
+        }else{
+            bat 'mvn compile'
+        }
+    }
+
+    parallel(par)
+
+    stage("Pit mutation"){
+                if(isUnix()){
+                    sh 'mv pitest:report'
+                }else{
+                    bat 'mvn pitest:report'
+                }
+            }
+
+
+    stage("Package"){
+        if(isUnix()){
+            sh 'mvn package'
+        }else{
+            bat 'mvn package'
+        }
+    }
+
+    stage("Archiving"){
+        archiveArtifacts artifacts: 'target/*.jar, target/pit-reports/**/*.*, target/site/**/*.*', followSymlinks: false
+    }
+    }
+}

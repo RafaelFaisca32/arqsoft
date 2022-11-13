@@ -10,7 +10,7 @@ import pt.isep.arqsoft.gorgeousSandwich.Util.Validations;
 
 public final class Hour implements IValueObject {
     private final int hour;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Shop.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Hour.class);
 
     public static Hour of(int hour) throws BusinessRuleViolationException {
         try {

@@ -1,9 +1,12 @@
 package pt.isep.arqsoft.gorgeousSandwich.Promotion.Domain;
 
 import org.junit.jupiter.api.Test;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Name;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Percentage;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TimeOfEffect;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
+import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.Manager;
+import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.UserId;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -82,6 +85,7 @@ class PromotionTest {
             assertTrue(p.sameAs(p2));
             p = new TestPromotion(new PromotionId(), TimeOfEffect.of(before, after), Percentage.of(25), PromotionType.GLOBAL);
             assertFalse(p.sameAs(p2));
+            assertFalse(p.sameAs(new Manager(Name.of("Teste"),new UserId())));
         } catch (BusinessRuleViolationException e) {
             fail("Error while trying to compare entties: " + e.getMessage());
         }

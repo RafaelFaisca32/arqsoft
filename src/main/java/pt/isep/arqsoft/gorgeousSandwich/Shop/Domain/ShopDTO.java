@@ -43,6 +43,7 @@ public class ShopDTO {
         this.name = name;
         this.id = id;
         this.managerId = managerId;
+        this.managerName=managerName;
     }
 
     @Override
@@ -64,6 +65,8 @@ public class ShopDTO {
                 ", sundayOpening=" + sundayOpening +
                 ", sundayClosing=" + sundayClosing +
                 ", name='" + name + '\'' +
+                ", managerName='" + managerName + '\'' +
+                ", managerId='" + managerId + '\'' +
                 '}';
     }
 }

@@ -8,7 +8,7 @@ public class PromotionId extends EntityId {
         super();
     }
 
-    PromotionId(String id) {
+    public PromotionId(String id) {
         super(id);
     }
 }

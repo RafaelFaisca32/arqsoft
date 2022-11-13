@@ -8,6 +8,9 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Username;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.ValueObjects.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import static com.mongodb.assertions.Assertions.assertTrue;
 import static com.mongodb.assertions.Assertions.fail;
 
@@ -26,24 +29,40 @@ class UserTest {
             User userEmail = new TestUser(new Email(invalidString), new Password(validStringPassword), new TaxIdentification(validTaxId), new Username(validStringUsername));
             fail(String.format("Email " + invalidString + " cannot be neither null nor empty and needs to have one @"));
         } catch (BusinessRuleViolationException ignored) {
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         try {
             User userPassword = new TestUser(new Email(validStringEmail), new Password(invalidString), new TaxIdentification(validTaxId), new Username(validStringUsername));
             fail(String.format("Password " + invalidString  + " cannot be neither null nor empty, needs to be at least 8 characters long, have 1 number and 1 capitalized letter. "));
         } catch (BusinessRuleViolationException ignored) {
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         try {
             User userTaxId = new TestUser(new Email(validStringEmail), new Password(validStringPassword), new TaxIdentification(invalidString), new Username(validStringUsername));
             fail(String.format("Tax Identification " + invalidString + " cannot be neither null nor empty and it needs to be 9 characters long"));
         } catch (BusinessRuleViolationException ignored) {
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
         try {
             User userUsername = new TestUser(new Email(validStringEmail), new Password(validStringPassword), new TaxIdentification(validTaxId), new Username(invalidString));
             fail(String.format("Username " + invalidString  + " cannot be neither null nor empty."));
         } catch (BusinessRuleViolationException ignored) {
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -56,6 +75,10 @@ class UserTest {
             assertTrue(email.equals(u.getEmail()));
         } catch (BusinessRuleViolationException e) {
             fail();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
     }
@@ -68,6 +91,10 @@ class UserTest {
             assertTrue(password.equals(u.getPassword()));
         } catch (BusinessRuleViolationException e) {
             fail();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -79,6 +106,10 @@ class UserTest {
             assertTrue(taxId.equals(u.getTaxIdentification()));
         } catch (BusinessRuleViolationException e) {
             fail();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -90,6 +121,10 @@ class UserTest {
             assertTrue(username.equals(u.getUsername()));
         } catch (BusinessRuleViolationException e) {
             fail();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 

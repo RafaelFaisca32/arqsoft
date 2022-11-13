@@ -46,5 +46,22 @@ public class CreatingUserDto {
         this.username = username;
     }
 
+    //<editor-fold desc="Needed for testing shops and promotions">
+    public String id;
+    public CreatingUserDto(String email, String password, String taxIdentification, String username, String id) {
+        this.email = email;
+        this.password = password;
+        this.taxIdentification = taxIdentification;
+        this.username = username;
+        this.id = id;
+    }
+
+    private CreatingUserDto(){}
+
+    public String getId() {
+        return id;
+    }
+    //</editor-fold>
+
 
 }

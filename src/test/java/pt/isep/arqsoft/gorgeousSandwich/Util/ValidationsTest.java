@@ -17,11 +17,11 @@ class ValidationsTest {
         for (int i : NUMS) {
             try {
                 Validations.numberIsInBetween(i, 3, 6);
-                if (i < 3 || i > 6) {
+                if (i <= 3 || i >= 6) {
                     fail(Integer.toString(i));
                 }
             } catch (ValidationException e) {
-                if (i >= 3 && i <= 6) {
+                if (i > 3 && i < 6) {
                     fail(Integer.toString(i));
                 }
             }

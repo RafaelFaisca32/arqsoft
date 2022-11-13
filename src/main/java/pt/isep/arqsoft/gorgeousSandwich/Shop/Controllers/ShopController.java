@@ -20,7 +20,7 @@ import java.util.List;
 public class ShopController {
 
     private final IShopService service;
-    private final Logger LOGGER = LoggerFactory.getLogger(Shop.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ShopController.class);
 
     public ShopController(IShopService service) {
         this.service = service;
@@ -28,7 +28,7 @@ public class ShopController {
 
     @PostMapping
     public ResponseEntity<ShopDTO> createShop(@Validated @RequestBody ShopDTO shopDTO){
-        LOGGER.trace(String.format("Requesting the creation of a new shop (%s)", shopDTO));
+        LOGGER.debug(String.format("Requesting the creation of a new shop (%s)", shopDTO.toString()));
         try {
             shopDTO = service.createShop(shopDTO);
             return ResponseEntity.ok().body(shopDTO);

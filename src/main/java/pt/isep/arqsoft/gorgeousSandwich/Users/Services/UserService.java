@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class UserService implements IUserService {
         this.userMapper = userMapper;
     }
 
-    public List<UserDto> getAll () {
+    public List<UserDto> getAll () throws NoSuchAlgorithmException, InvalidKeySpecException {
         List<User> userList = this.userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
         for(User user : userList) {
@@ -38,8 +40,7 @@ public class UserService implements IUserService {
         return exists;
     }
 
-    public User register(CreatingUserDto dto) throws BusinessRuleViolationException
-    {
-        return this.userRepository.save(userMapper.toDomain(dto));
+    public CreatingUserDto register(CreatingUserDto dto) throws BusinessRuleViolationException, InvalidKeySpecException, NoSuchAlgorithmException {
+        return this.userMapper.toCreateUserDTO(this.userRepository.save(userMapper.toDomain(dto)));
     }
 }

@@ -1,7 +1,5 @@
 package pt.isep.arqsoft.gorgeousSandwich.Promotion.Domain;
 
-import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.ShopId;
-
 import java.util.Date;
 
 public class PromotionDTO {
@@ -13,17 +11,17 @@ public class PromotionDTO {
 
     public Date to;
 
-    public ShopId shop;
+    public String shopId;
 
     public PromotionType promotionType;
 
 
-    public PromotionDTO(String id, double percentage, Date from, Date to, ShopId shop, PromotionType promotionType) {
+    public PromotionDTO(String id, double percentage, Date from, Date to, String shopId, PromotionType promotionType) {
         this.id = id;
         this.percentage = percentage;
         this.from = from;
         this.to = to;
-        this.shop = shop;
+        this.shopId = shopId;
         this.promotionType=promotionType;
     }
 }

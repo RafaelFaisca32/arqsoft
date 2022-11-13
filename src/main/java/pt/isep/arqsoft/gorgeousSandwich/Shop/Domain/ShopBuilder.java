@@ -128,7 +128,13 @@ public class ShopBuilder {
 
     public Shop build() throws BusinessRuleViolationException {
         try {
-            return new Shop(new ShopId(id), new DaySchedule(Hour.of(mondayOpening), Hour.of(mondayClosing)),
+            ShopId shopId;
+            if (id==null){
+                shopId=new ShopId();
+            }else{
+                shopId=new ShopId(id);
+            }
+            return new Shop(shopId, new DaySchedule(Hour.of(mondayOpening), Hour.of(mondayClosing)),
                     new DaySchedule(Hour.of(tuesdayOpening), Hour.of(tuesdayClosing)), new DaySchedule(Hour.of(wednesdayOpening),
                     Hour.of(wednesdayClosing)),
                     new DaySchedule(Hour.of(thursdayOpening), Hour.of(thursdayClosing)), new DaySchedule(Hour.of(fridayOpening),

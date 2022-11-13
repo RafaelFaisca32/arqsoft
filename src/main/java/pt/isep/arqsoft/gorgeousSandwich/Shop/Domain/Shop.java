@@ -11,9 +11,8 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Name;
 
 @Document("shop")
 public class Shop implements IAggregateRoot<ShopId> {
-    private final static Logger LOGGER = LoggerFactory.getLogger(Shop.class);
-   @Id
-   private ShopId id;
+    @Id
+    private ShopId id;
     private DaySchedule monday;
     private DaySchedule tuesday;
     private DaySchedule wednesday;
@@ -26,20 +25,7 @@ public class Shop implements IAggregateRoot<ShopId> {
 
     private Manager manager;
 
-    Shop(Name name, DaySchedule monday, DaySchedule tuesday,
-         DaySchedule wednesday, DaySchedule thursday, DaySchedule friday, DaySchedule saturday, DaySchedule sunday) {
-        id = new ShopId();
-        this.name = name;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.saturday = saturday;
-        this.sunday = sunday;
-    }
-
-    public Shop(ShopId id, DaySchedule monday, DaySchedule tuesday, DaySchedule wednesday, DaySchedule thursday, DaySchedule friday, DaySchedule saturday, DaySchedule sunday, Name name, Manager manager) {
+    protected Shop(ShopId id, DaySchedule monday, DaySchedule tuesday, DaySchedule wednesday, DaySchedule thursday, DaySchedule friday, DaySchedule saturday, DaySchedule sunday, Name name, Manager manager) {
         this.id = id;
         this.monday = monday;
         this.tuesday = tuesday;
@@ -52,9 +38,6 @@ public class Shop implements IAggregateRoot<ShopId> {
         this.manager = manager;
     }
 
-    private Shop() {
-
-    }
 
     public ShopId getId() {
         return id;
@@ -122,8 +105,7 @@ public class Shop implements IAggregateRoot<ShopId> {
                 ", saturday=" + saturday +
                 ", sunday=" + sunday +
                 ", name=" + name +
+                ", manager=" + manager +
                 '}';
     }
-
-
 }

@@ -1,0 +1,1 @@
+mvn clean compile test javadoc:javadoc pitest:report package

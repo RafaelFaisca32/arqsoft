@@ -2,13 +2,15 @@ package pt.isep.arqsoft.gorgeousSandwich.Users.Domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntity;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntityId;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Email;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Password;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TaxIdentification;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Username;
 
 @Document("user")
-public class User {
+public class User implements IEntity<UserId> {
 
     @Id
     private UserId id;
@@ -41,4 +43,16 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean sameAs(IEntity<? extends IEntityId> otherEntity) {
+        if (otherEntity instanceof User){
+            return obtainId().equals(((User) otherEntity).obtainId());
+        }
+        return false;
+    }
+
+    @Override
+    public UserId obtainId() {
+        return id;
+    }
 }

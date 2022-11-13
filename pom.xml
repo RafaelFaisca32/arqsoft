@@ -38,6 +38,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+		<!-- OPEN API 3 (Swagger) -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.12</version>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -45,6 +51,68 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- JAVA CODE COVERAGE MAVEN PLUGIN: jacoco:report (integrated on test goal) -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- PITEST MAVEN PLUGIN: pitest:report -->
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.3</version>
+
+				<executions>
+					<execution>
+						<id>pit-report</id>
+						<!-- optional, this example attached the goal into mvn test phase -->
+						<phase>test</phase>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<!-- https://github.com/hcoles/pitest/issues/284 -->
+				<!-- Need this to support JUnit 5 -->
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.15</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<targetClasses>
+						<param>pt.isep.arqsoft.gorgeousSandwich.*.Domain.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>pt.isep.arqsoft.gorgeousSandwich.*.Domain.*</param>
+					</targetTests>
+				</configuration>
+			</plugin>
+			<!-- JAVADOC MAVEN PLUGIN: javadoc:javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.4.1</version>
 			</plugin>
 		</plugins>
 	</build>

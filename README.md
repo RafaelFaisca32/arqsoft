@@ -4,7 +4,7 @@
 ## Build Project From Sources
 
 To build the project using the current version of the code source, it is necessary to 
-execute the Maven package goal, creating the WAR file in target, test 
+execute the Maven package goal, creating the JAR file in target, test 
 
 
 ```bat
@@ -14,13 +14,13 @@ execute the Maven package goal, creating the WAR file in target, test
 Then, to access and run the application just execute the following commands
 
 ```bat
-java -jar .\target\gorgeousSandwich-0.0.1-SNAPSHOT.war
+java -jar .\target\gorgeousSandwich-0.0.1-SNAPSHOT.jar
 ```
 
 Then the application will run and be similar to the following text excerpt
 
 ```text
-$> java -jar .\target\gorgeousSandwich-0.0.1-SNAPSHOT.war
+$> java -jar .\target\gorgeousSandwich-0.0.1-SNAPSHOT.jar
 ______                    _      _____          __  _
 |  ___|                  | |    /  ___|        / _|| |
 | |_     ___    ___    __| |    \ `--.   ___  | |_ | |_ __      __  __ _  _ __   ___
@@ -31,7 +31,7 @@ ______                    _      _____          __  _
 
 Gorgeous Sandwich 0.0.1-SNAPSHOT
 Powered by Spring Boot 2.7.5
-2022-11-10 18:10:00.771  INFO 23056 --- [           main] p.i.a.g.GorgeousSandwichApplication      : Starting GorgeousSandwichApplication v0.0.1-SNAPSHOT using Java 17.0.4.1 on Barbatos-Rex with PID 23056 (D:\ARQSOFT\arqsoft-22-23-202\part 1\projects\gorgeousSandwich\target\gorgeousSandwich-0.0.1-SNAPSHOT.war started by Andre in D:\ARQSOFT\arqsoft-22-23-202\part 1\projects\gorgeousSandwich)
+2022-11-10 18:10:00.771  INFO 23056 --- [           main] p.i.a.g.GorgeousSandwichApplication      : Starting GorgeousSandwichApplication v0.0.1-SNAPSHOT using Java 17.0.4.1 on Barbatos-Rex with PID 23056 (D:\ARQSOFT\arqsoft-22-23-202\part 1\projects\gorgeousSandwich\target\gorgeousSandwich-0.0.1-SNAPSHOT.jar started by Andre in D:\ARQSOFT\arqsoft-22-23-202\part 1\projects\gorgeousSandwich)
 2022-11-10 18:10:00.777  INFO 23056 --- [           main] p.i.a.g.GorgeousSandwichApplication      : No active profile set, falling back to 1 default profile: "default"
 2022-11-10 18:10:01.340  INFO 23056 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
 2022-11-10 18:10:01.384  INFO 23056 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 3 MongoDB repository interfaces.

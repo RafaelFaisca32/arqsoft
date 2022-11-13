@@ -1,10 +1,10 @@
 package pt.isep.arqsoft.gorgeousSandwich.Shop.Domain;
 
-import lombok.var;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Hour;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntity;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntityId;
+import pt.isep.arqsoft.gorgeousSandwich.Util.Validations;
 
 public class DaySchedule implements IEntity<DayScheduleId> {
     private Hour closingHour;
@@ -13,7 +13,7 @@ public class DaySchedule implements IEntity<DayScheduleId> {
     private DayScheduleId id;
 
     public DaySchedule(Hour openingHour, Hour closingHour) throws BusinessRuleViolationException {
-
+        Validations.numberIsGreater(closingHour.getHour(), openingHour.getHour());
         id = new DayScheduleId();
         this.closingHour = closingHour;
         this.openingHour = openingHour;
@@ -30,7 +30,7 @@ public class DaySchedule implements IEntity<DayScheduleId> {
     @Override
     public boolean sameAs(IEntity<? extends IEntityId> otherEntity) {
         if (otherEntity instanceof DaySchedule) {
-            var otherShop = (DaySchedule) otherEntity;
+            DaySchedule otherShop = (DaySchedule) otherEntity;
             return obtainId().equals(otherShop.obtainId());
         }
         return true;

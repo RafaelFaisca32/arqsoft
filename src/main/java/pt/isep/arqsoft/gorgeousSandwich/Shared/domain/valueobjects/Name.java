@@ -11,7 +11,7 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.ValidationException;
 public final class Name implements IValueObject {
 
     private final String stringValue;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Shop.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Name.class);
 
 
     private Name(String stringValue) throws BusinessRuleViolationException {
@@ -28,7 +28,7 @@ public final class Name implements IValueObject {
         try {
             return new Name(name);
         } catch (BusinessRuleViolationException e) {
-            LOGGER.error(String.format("String %s violates Name's rules!", name,e));
+            LOGGER.error(String.format("String %s violates Name's rules!", name),e);
             throw e;
         }
     }
