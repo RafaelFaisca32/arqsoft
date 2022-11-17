@@ -8,10 +8,6 @@ public class TotalPrice {
 
     private final double totalValue;
 
-    public TotalPrice(){
-        this.totalValue = 1;
-    }
-
     public TotalPrice(double totalValue) throws BusinessRuleViolationException {
         try {
             Validations.notNull(totalValue);
@@ -21,6 +17,10 @@ public class TotalPrice {
         }
         this.totalValue = totalValue;
     }
+
+//    public TotalPrice(){
+//        this.totalValue = 1;
+//    }
 
     public double getTotalValue() {
         return totalValue;

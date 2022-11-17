@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.*;
 
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class UserService implements IUserService {
         this.userMapper = userMapper;
     }
 
-    public List<UserDto> getAll () throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public List<UserDto> getAll () throws NoSuchAlgorithmException {
         List<User> userList = this.userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
         for(User user : userList) {
@@ -29,18 +29,30 @@ public class UserService implements IUserService {
         return userDtoList;
     }
 
-    public UserDto getLogin(List<UserDto> userDtoList, CreatingUserDto userDTO)
-    {
+    public UserDto getLogin(List<UserDto> userDtoList, CreatingUserDto userDTO) throws NoSuchAlgorithmException {
         UserDto exists = null;
         for(UserDto user : userDtoList) {
-            if(user.getUsername().equals(userDTO.getUsername()) && user.getPassword().equals(userDTO.getPassword())){
+            String password = passwordHash(userDTO.getPassword());
+            if(user.getEmail().equals(userDTO.getEmail()) && user.getPassword().equals(password)){
                 exists = user;
             }
         }
         return exists;
     }
 
-    public CreatingUserDto register(CreatingUserDto dto) throws BusinessRuleViolationException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public CreatingUserDto register(CreatingUserDto dto) throws BusinessRuleViolationException, NoSuchAlgorithmException {
         return this.userMapper.toCreateUserDTO(this.userRepository.save(userMapper.toDomain(dto)));
+    }
+
+    public String passwordHash (String password) throws NoSuchAlgorithmException {
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(password.getBytes());
+        byte[] bytes = m.digest();
+        StringBuilder s = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++)
+        {
+            s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return s.toString() + "A";
     }
 }

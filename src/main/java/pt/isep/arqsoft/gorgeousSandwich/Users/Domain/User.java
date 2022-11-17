@@ -1,6 +1,7 @@
 package pt.isep.arqsoft.gorgeousSandwich.Users.Domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntity;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.patterns.IEntityId;
@@ -14,6 +15,7 @@ public class User implements IEntity<UserId> {
 
     @Id
     private UserId id;
+    @Indexed(unique = true)
     private Email email;
     private Password password;
     private TaxIdentification taxIdentification;

@@ -2,26 +2,17 @@ package pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects;
 
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Base64;
 import java.util.function.IntPredicate;
 
 public class Password {
 
     private final String password;
 
-    public Password(String password) throws BusinessRuleViolationException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public Password(String password) throws BusinessRuleViolationException, NoSuchAlgorithmException {
         if(isValid(password)){
-            SecureRandom secureRandom = new SecureRandom();
-            byte[] salt = secureRandom.generateSeed(12);
-            PBEKeySpec pbeKeySpec = new PBEKeySpec(password.toCharArray(), salt, 10, 512);
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            byte[] hash = skf.generateSecret(pbeKeySpec).getEncoded();
-            this.password = Base64.getMimeEncoder().encodeToString(hash);
+            this.password = password;
         }
         else {
             throw new BusinessRuleViolationException("Invalid password, it need to be at least " +

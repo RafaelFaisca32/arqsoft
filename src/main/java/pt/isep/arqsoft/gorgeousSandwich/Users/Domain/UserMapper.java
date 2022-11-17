@@ -8,11 +8,10 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Username;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
 @Component
 public class UserMapper implements IUserMapper {
-    public UserDto toDTO(CreatingUserDto requestBody){
+    public UserDto toDTO(CreatingUserDto requestBody) throws NoSuchAlgorithmException {
         String email = requestBody.getEmail();
         String password = requestBody.getPassword();
         String taxIdentification = requestBody.getTaxIdentification();
@@ -20,7 +19,7 @@ public class UserMapper implements IUserMapper {
         return new UserDto(email,password,taxIdentification,username);
     }
 
-    public UserDto toDTO(User requestBody) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public UserDto toDTO(User requestBody) throws NoSuchAlgorithmException {
         String email = requestBody.getEmail().getEmail();
         String password = requestBody.getPassword().getPassword();
         String taxIdentification = requestBody.getTaxIdentification().getTaxIdentification();
@@ -28,7 +27,7 @@ public class UserMapper implements IUserMapper {
         return new UserDto(email,password,taxIdentification,username);
     }
 
-    public User toDomain(CreatingUserDto createSandwich) throws BusinessRuleViolationException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public User toDomain(CreatingUserDto createSandwich) throws BusinessRuleViolationException, NoSuchAlgorithmException {
         String email = createSandwich.getEmail();
         String password = createSandwich.getPassword();
         String taxIdentification = createSandwich.getTaxIdentification();
@@ -37,7 +36,7 @@ public class UserMapper implements IUserMapper {
     }
 
     @Override
-    public CreatingUserDto toCreateUserDTO(User user) {
+    public CreatingUserDto toCreateUserDTO(User user) throws NoSuchAlgorithmException {
         String email = user.getEmail().getEmail();
         String password = user.getPassword().getPassword();
         String taxIdentification = user.getTaxIdentification().getTaxIdentification();

@@ -56,7 +56,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
+				<version>0.8.4</version>
 				<executions>
 					<execution>
 						<goals>
@@ -106,6 +106,7 @@
 					<targetTests>
 						<param>pt.isep.arqsoft.gorgeousSandwich.*.Domain.*</param>
 					</targetTests>
+					<timestampedReports>false</timestampedReports>
 				</configuration>
 			</plugin>
 			<!-- JAVADOC MAVEN PLUGIN: javadoc:javadoc -->

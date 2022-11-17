@@ -1,6 +1,7 @@
 package pt.isep.arqsoft.gorgeousSandwich.Order.Domain;
 
 import pt.isep.arqsoft.gorgeousSandwich.Promotion.Domain.PromotionId;
+import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TotalPrice;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.ShopId;
 
@@ -21,12 +22,15 @@ public class OrderBuilder {
 
     public PromotionStrategy promotionStrategy;
 
+    public double totalPrice;
+
     public OrderBuilder() {
         this.id = null;
         this.shopId = null;
         this.productEntries = null;
         this.promotions = null;
         this.promotionStrategyType = null;
+        this.totalPrice = 0;
     }
 
     public OrderBuilder withShopId(String shopId) {
@@ -49,6 +53,11 @@ public class OrderBuilder {
         return this;
     }
 
+    public OrderBuilder withTotalPrice(double price) {
+        this.totalPrice = price;
+        return this;
+    }
+
     public OrderBuilder withPromotionStrategy() {
         if (promotionStrategyType.name().equals(PromotionStrategyType.CUMULATIVE.name())) {
             this.promotionStrategy = new CumulativePromotion(promotions);
@@ -58,10 +67,10 @@ public class OrderBuilder {
     }
 
     public Order build() throws BusinessRuleViolationException {
-        List<ProductEntry> pe = new ArrayList<>() ;
-        for (ProductEntryDTO productEntryDTO: productEntries) {
+        List<ProductEntry> pe = new ArrayList<>();
+        for (ProductEntryDTO productEntryDTO : productEntries) {
             pe.add(new ProductEntry(productEntryDTO.id, productEntryDTO.quantity));
         }
-        return new Order(new ShopId(shopId), pe, promotionStrategy);
+        return new Order(new ShopId(shopId), pe, promotionStrategy, new TotalPrice(totalPrice));
     }
 }

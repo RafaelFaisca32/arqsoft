@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<analyzerConfiguration version="12.3.0.766" analyzer="MetricThresholds">
+	<stringEntry value="0:900:WARNING" name="CoreLinesOfCode:SourceFile"></stringEntry>
+	<stringEntry value="70.00:100.00:ERROR" name="CoreMaintainabilityLevel:System"></stringEntry>
+	<stringEntry value="0:15:WARNING" name="CoreModifiedCcn:Routine"></stringEntry>
+	<stringEntry value="0.00:10.00:WARNING" name="CoreNccd:Module"></stringEntry>
+	<stringEntry value="0:100:WARNING" name="CoreStatements:Routine"></stringEntry>
+</analyzerConfiguration>
