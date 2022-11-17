@@ -8,7 +8,7 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationE
 import pt.isep.arqsoft.gorgeousSandwich.Users.Domain.UserId;
 
 public class ShopBuilder {
-    private final Logger LOGGER = LoggerFactory.getLogger(ShopBuilder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShopBuilder.class);
     private String id;
     private int mondayOpening;
     private int mondayClosing;
@@ -141,9 +141,9 @@ public class ShopBuilder {
                     Hour.of(fridayClosing)),
                     new DaySchedule(Hour.of(saturdayOpening), Hour.of(saturdayClosing)), new DaySchedule(Hour.of(sundayOpening), Hour.of(sundayClosing)), Name.of(name),
                     new Manager(Name.of(managerName), new UserId(managerId)));
-        } catch (BusinessRuleViolationException e) {
+        } catch (Exception e) {
             LOGGER.error("Could not build Shop", e);
-            throw e;
+            throw new BusinessRuleViolationException("Could not build shop",e);
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class OrderMapper implements IOrderMapper {
 
     @Override
-    public Order CreateDTOtoDomain(CreateOrderDTO orderDTO) {
+    public Order CreateDTOtoDomain(CreateOrderDTO orderDTO, double price) {
         try {
             return new OrderBuilder()
                     .withShopId(orderDTO.shopId)
@@ -18,6 +18,7 @@ public class OrderMapper implements IOrderMapper {
                     .withPromotions(orderDTO.promotions)
                     .withPromotionStrategyType(orderDTO.promotionStrategyType)
                     .withPromotionStrategy()
+                    .withTotalPrice(price)
                     .build();
         } catch (BusinessRuleViolationException e) {
             throw new RuntimeException("Cannot convert DTO to Domain!", e);

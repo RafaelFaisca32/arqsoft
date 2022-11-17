@@ -1,5 +1,7 @@
 package pt.isep.arqsoft.gorgeousSandwich.Promotion.Domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.Percentage;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.domain.valueobjects.TimeOfEffect;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
@@ -7,6 +9,7 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationE
 import java.util.Date;
 
 public class GlobalPromotionBuilder {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalPromotionBuilder.class);
     private String id;
     private double percentage;
     private Date from;
@@ -42,10 +45,15 @@ public class GlobalPromotionBuilder {
     }
 
     public GlobalPromotion build() throws BusinessRuleViolationException {
-        if (id==null){
-            return new GlobalPromotion(TimeOfEffect.of(from,to), Percentage.of(percentage));
+        try {
+            if (id==null){
+                return new GlobalPromotion(TimeOfEffect.of(from,to), Percentage.of(percentage));
+            }
+            return new GlobalPromotion(new PromotionId(id), TimeOfEffect.of(from,to), Percentage.of(percentage));
+        } catch (BusinessRuleViolationException e) {
+            LOGGER.error("Could not local promotion with the information given!");
+            throw new BusinessRuleViolationException("Could not local promotion with the information given!",e);
         }
-        return new GlobalPromotion(new PromotionId(id), TimeOfEffect.of(from,to), Percentage.of(percentage));
     }
 
 

@@ -1,5 +1,8 @@
 package pt.isep.arqsoft.gorgeousSandwich.Users.Domain;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class UserDto {
 
     public String email;
@@ -39,9 +42,17 @@ public class UserDto {
         this.username = username;
     }
 
-    public UserDto(String email, String password, String taxIdentification, String username) {
+    public UserDto(String email, String password, String taxIdentification, String username) throws NoSuchAlgorithmException {
         this.email = email;
-        this.password = password;
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(password.getBytes());
+        byte[] bytes = m.digest();
+        StringBuilder s = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++)
+        {
+            s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        this.password = s.toString() + "A";
         this.taxIdentification = taxIdentification;
         this.username = username;
     }

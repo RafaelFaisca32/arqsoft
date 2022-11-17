@@ -6,12 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.IShopService;
-import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.Shop;
 import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.ShopDTO;
-import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.ShopId;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +17,7 @@ import java.util.List;
 public class ShopController {
 
     private final IShopService service;
-    private final Logger LOGGER = LoggerFactory.getLogger(ShopController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShopController.class);
 
     public ShopController(IShopService service) {
         this.service = service;
@@ -31,6 +28,7 @@ public class ShopController {
         LOGGER.debug(String.format("Requesting the creation of a new shop (%s)", shopDTO.toString()));
         try {
             shopDTO = service.createShop(shopDTO);
+            LOGGER.info("Shop was successfully created");
             return ResponseEntity.ok().body(shopDTO);
         } catch (Exception e) {
             LOGGER.error("Could not create Shop!",e);
@@ -42,6 +40,7 @@ public class ShopController {
     public ResponseEntity<ShopDTO[]> listAllShops(){
         Iterable<ShopDTO> itr = service.getAll();
         List<ShopDTO> l = new ArrayList<>((Collection<? extends ShopDTO>) itr);
+        LOGGER.info("Retrieving all registered shops");
         return ResponseEntity.ok().body(l.toArray(new ShopDTO[0]));
     }
 
