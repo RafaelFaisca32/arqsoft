@@ -7,7 +7,7 @@ import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationE
 
 @Component
 public class ShopMapper implements IShopMapper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ShopMapper.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ShopMapper.class);
 
     @Override
     public Shop toDomain(ShopDTO dto) {

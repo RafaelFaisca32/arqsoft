@@ -13,11 +13,6 @@ public class Validations {
             throw new ValidationException(String.format("Number %s is not between %s and %s!", value, lower, higher));
     }
 
-    public static void numberIsBetween(double value, double lower, double higher) throws ValidationException {
-        if (value < lower || value > higher)
-            throw new ValidationException(String.format("Number %s is not between %s and %s!", value, lower, higher));
-    }
-
     public static void numberIsGreater(double value, double lower) {
         if (value <= lower) {
             throw new ValidationException(String.format("Number %s is not greater than %s!", value, lower));

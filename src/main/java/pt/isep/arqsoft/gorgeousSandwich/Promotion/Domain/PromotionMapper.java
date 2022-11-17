@@ -1,14 +1,12 @@
 package pt.isep.arqsoft.gorgeousSandwich.Promotion.Domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pt.isep.arqsoft.gorgeousSandwich.Shared.exceptions.BusinessRuleViolationException;
 import pt.isep.arqsoft.gorgeousSandwich.Shop.Domain.ShopId;
 
 @Component
 public class PromotionMapper implements IPromotionMapper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PromotionMapper.class);
+
     @Override
     public Promotion toDomain(PromotionDTO dto) {
         try {
@@ -22,7 +20,6 @@ public class PromotionMapper implements IPromotionMapper {
                             .withFrom(dto.from).withTo(dto.to).build();
             }
         } catch (BusinessRuleViolationException e) {
-            LOGGER.error("Cannot convert DTO to Domain!",e);
             throw new RuntimeException("Cannot convert DTO to Domain!", e);
         }
     }

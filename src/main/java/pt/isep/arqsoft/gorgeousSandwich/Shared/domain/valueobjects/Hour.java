@@ -24,7 +24,7 @@ public final class Hour implements IValueObject {
 
     private Hour(int hour) throws BusinessRuleViolationException {
         try {
-            Validations.numberIsBetween(hour,0,24);
+            Validations.numberIsInBetween(hour,0,24);
         } catch (ValidationException exception) {
             throw new BusinessRuleViolationException(String.format("Hour must be between 0 and 24 and not %d", hour));
         }

@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ISandwichService {
 
-    public SandwichDto createSandwich(CreatingSandwichDto dto) throws BusinessRuleViolationException;
-
-    public List<SandwichDto> getAll();
+    public Sandwich createSandwich(CreatingSandwichDto dto) throws BusinessRuleViolationException;
+    public List<SandwichDto> getAll ();
 }

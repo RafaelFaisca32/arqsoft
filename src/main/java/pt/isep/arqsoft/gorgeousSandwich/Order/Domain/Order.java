@@ -17,7 +17,7 @@ public class Order implements IAggregateRoot<OrderId> {
     @Id
     private OrderId id;
 
-    private ShopId shop;
+    private final ShopId shop;
 
     private List<ProductEntry> productEntries;
 
@@ -25,30 +25,29 @@ public class Order implements IAggregateRoot<OrderId> {
 
     private TotalPrice price;
 
-    Order(ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy) throws BusinessRuleViolationException {
+    Order(ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy) {
         this.id = new OrderId();
         this.shop = shop;
         this.productEntries = productEntries;
         this.promotionStrategy = promotionStrategy;
-        this.price = new TotalPrice(1);
+        this.price = new TotalPrice();
     }
 
-    Order(OrderId id, ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy) throws BusinessRuleViolationException {
+    Order(OrderId id, ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy) {
         this.id = id;
         this.shop = shop;
         this.productEntries = productEntries;
         this.promotionStrategy = promotionStrategy;
-        this.price = new TotalPrice(1);
+        this.price = new TotalPrice();
     }
 
-    Order(ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy, TotalPrice totalPrice) {
-        this.id = new OrderId();
+    private Order(OrderId id, ShopId shop, List<ProductEntry> productEntries, PromotionStrategy promotionStrategy, TotalPrice totalPrice) {
+        this.id = id;
         this.shop = shop;
         this.productEntries = productEntries;
         this.promotionStrategy = promotionStrategy;
         this.price = totalPrice;
     }
-    private Order(){}
 
     @Override
     public boolean sameAs(IEntity<? extends IEntityId> otherEntity) {

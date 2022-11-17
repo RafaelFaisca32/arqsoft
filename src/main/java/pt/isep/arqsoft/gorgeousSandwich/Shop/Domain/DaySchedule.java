@@ -12,28 +12,11 @@ public class DaySchedule implements IEntity<DayScheduleId> {
 
     private DayScheduleId id;
 
-    DaySchedule(){}
-
-    DaySchedule(Hour openingHour, Hour closingHour) throws BusinessRuleViolationException {
-        try {
-            Validations.numberIsGreater(closingHour.getHour(), openingHour.getHour());
-            id = new DayScheduleId();
-            this.closingHour = closingHour;
-            this.openingHour = openingHour;
-        } catch (Exception e) {
-            throw new BusinessRuleViolationException(e);
-        }
-    }
-
-    DaySchedule(DayScheduleId id,Hour openingHour, Hour closingHour) throws BusinessRuleViolationException {
-        try {
-            Validations.numberIsGreater(closingHour.getHour(), openingHour.getHour());
-           this.id = id;
-            this.closingHour = closingHour;
-            this.openingHour = openingHour;
-        } catch (Exception e) {
-            throw new BusinessRuleViolationException(e);
-        }
+    public DaySchedule(Hour openingHour, Hour closingHour) throws BusinessRuleViolationException {
+        Validations.numberIsGreater(closingHour.getHour(), openingHour.getHour());
+        id = new DayScheduleId();
+        this.closingHour = closingHour;
+        this.openingHour = openingHour;
     }
 
     public Hour getClosingHour() {
@@ -50,7 +33,7 @@ public class DaySchedule implements IEntity<DayScheduleId> {
             DaySchedule otherShop = (DaySchedule) otherEntity;
             return obtainId().equals(otherShop.obtainId());
         }
-        return false;
+        return true;
     }
 
     @Override
